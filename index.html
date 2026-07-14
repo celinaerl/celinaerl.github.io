@@ -1,1 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graphic Design Style Exploration with Stable Diffusion 1.5</title>
+<style>
+  :root {
+    --ink: #111111;
+    --paper: #ffffff;
+    --rule: #111111;
+    --muted: #6b6b6b;
+    --mono: 'JetBrains Mono', 'IBM Plex Mono', Menlo, Consolas, monospace;
+    --serif: 'Source Serif Pro', 'Iowan Old Style', 'Georgia', serif;
+  }
 
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.65;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .fade-in { animation: fadeIn 0.6s ease-out both; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: clamp(32px, 8vw, 96px) clamp(20px, 5vw, 24px) 120px;
+  }
+
+  header.title-block {
+    margin-bottom: 56px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 18px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 40px);
+    line-height: 1.2;
+    font-weight: 600;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.02em;
+  }
+
+  .hairline {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: 40px 0;
+  }
+
+  .hairline.thin {
+    border-top: 1px solid #ccc;
+  }
+
+  /* Abstract */
+  .abstract {
+    padding: 28px 0 8px;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 56px;
+  }
+
+  .abstract .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+
+  .abstract p {
+    font-size: 16.5px;
+    font-style: italic;
+    color: #222;
+  }
+
+  section {
+    margin-bottom: 56px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .section-num {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--muted);
+    min-width: 22px;
+  }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+
+  section p {
+    margin: 0 0 18px;
+  }
+
+  section ul {
+    margin: 0 0 18px;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  section li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+
+  section li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+
+  code, .inline-code {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: #f2f2f2;
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+
+  /* Image placeholder with registration marks */
+  .figure {
+    margin: 28px 0 34px;
+  }
+
+  .plate {
+    position: relative;
+    border: 1px dashed #b0b0b0;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .plate .corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+  }
+  .plate .corner::before, .plate .corner::after {
+    content: "";
+    position: absolute;
+    background: var(--ink);
+  }
+  .plate .corner::before { width: 100%; height: 1px; top: 50%; }
+  .plate .corner::after { height: 100%; width: 1px; left: 50%; }
+  .plate .tl { top: -1px; left: -1px; }
+  .plate .tr { top: -1px; right: -1px; }
+  .plate .bl { bottom: -1px; left: -1px; }
+  .plate .br { bottom: -1px; right: -1px; }
+
+  .plate-label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    text-align: center;
+    text-transform: uppercase;
+    max-width: 420px;
+  }
+
+  .fig-caption {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+  }
+
+  .fig-caption b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  footer {
+    margin-top: 64px;
+  }
+
+  footer .label {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 15px;
+  }
+
+  footer li {
+    padding: 10px 0;
+    border-top: 1px solid #e2e2e2;
+  }
+  footer li:last-child { border-bottom: 1px solid #e2e2e2; }
+
+  @media (max-width: 520px) {
+    body { font-size: 16.5px; }
+    .abstract p { font-size: 15.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="title-block fade-in">
+    <p class="eyebrow">Creative Coding — Advanced</p>
+    <h1>Graphic Design Style Exploration with Stable Diffusion&nbsp;1.5</h1>
+    <p class="subtitle">A Gradio-based image generation tool built for style comparison and LoRA training in Google Colab</p>
+  </header>
+
+  <div class="abstract fade-in">
+    <p class="label">Abstract</p>
+    <p>
+      This project investigates the use of Stable Diffusion 1.5 (SD1.5) for exploring graphic design styles
+      that are underrepresented in the model's training data. Rather than focusing on the figurative subject
+      matter SD1.5 already handles well, such as people and animals, the goal was to test the model's capacity
+      for more abstract, structure-driven design aesthetics. A Gradio-based web application was built in Google
+      Colab, first establishing a stable foundation for basic text-to-image generation before extending it with
+      custom-trained LoRA models, ControlNet (Canny) edge detection, and accessible interface labeling for
+      non-expert users. Two original LoRAs were trained: a colorful, geometric risograph style, and a
+      contrasting organic, thin-lined, minimalist style. Two existing community LoRAs — a linocut style and a
+      vector lineart style — were integrated for further comparison. The project surfaced several practical
+      challenges, including inconsistent LoRA influence, long model-switching times, and unstable training
+      results, one of which was repurposed as an intentional experimental style rather than discarded. The
+      result is a working image-generation tool that makes style exploration in SD1.5 approachable for users
+      without prior experience in generative AI.
+    </p>
+  </div>
+
+  <section class="fade-in">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2>Background</h2>
+    </div>
+    <p>
+      Stable Diffusion 1.5 performs reliably for figurative prompts such as people, animals, and everyday
+      objects, but its performance drops noticeably for more abstract, structure-driven design concepts such
+      as typography or grid-based systems. These graphic design styles are underrepresented in the model's
+      training data, making them a natural gap to explore.
+    </p>
+    <p>
+      The aim of this project was to specifically develop custom LoRA models representing graphic design
+      aesthetics that are otherwise poorly represented in the base SD1.5 model, and to package this exploration
+      into an accessible tool for generating and comparing these styles side by side.
+    </p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2>Approach</h2>
+    </div>
+    <p>
+      Before implementing more advanced features such as trained LoRAs or ControlNet-based edge detection, it
+      was essential to establish a stable, working foundation using Gradio. A simple set of core features — a
+      positive and negative prompt field, a function to fix or randomize the seed, and sliders for prompt
+      strictness (CFG scale) and inference steps — were implemented and verified first, ensuring reliable image
+      generation for both Stable Diffusion&nbsp;1.5 and Dreamshaper-8 before adding further complexity.
+    </p>
+    <p>
+      For the custom LoRAs, a training set of approximately 35 images was used for each of two styles. The
+      first, a risograph-inspired style, produced colorful and geometric results. The second was designed to
+      contrast this with a more organic, thin-lined, minimalist aesthetic.
+    </p>
+
+    <div class="figure">
+      <div class="plate">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <p class="plate-label">Training set — risograph &amp; organic lineart image sets</p>
+      </div>
+      <p class="fig-caption"><b>Fig. 1</b> — sample images from the two training sets.</p>
+    </div>
+
+    <p>
+      To broaden the range of available styles and allow for comparison, two existing community-trained LoRAs
+      were also integrated into the application: <em>Linoleum Cut</em> by grafikzeug, for a linocut woodcut
+      aesthetic, and <em>lineart-lora</em> by whitebearhands, for a vector illustration style.
+    </p>
+    <p>
+      Since the application was intended for users unfamiliar with image generation, labeling each function in
+      plain, accessible language was a key design goal. Some technical terms, such as <span class="inline-code">seed</span>,
+      were difficult to translate directly into everyday language, so short explanatory descriptions were added
+      alongside each control for additional clarity.
+    </p>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2>Findings &amp; Results</h2>
+    </div>
+    <p>
+      The application was used to generate and compare outputs across both custom-trained LoRAs and the two
+      integrated community LoRAs, using a shared set of prompts and generation settings to keep comparisons
+      consistent.
+    </p>
+
+    <div class="figure">
+      <div class="plate">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <p class="plate-label">Generated results across models and prompts</p>
+      </div>
+      <p class="fig-caption"><b>Fig. 2</b> — comparison of outputs across base models and styles.</p>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2>LoRA Influences</h2>
+    </div>
+    <p>
+      The following comparisons illustrate the extent to which each LoRA shapes the generated output at
+      varying strengths, highlighting the visual signature each style contributes to a shared base prompt.
+    </p>
+
+    <div class="figure">
+      <div class="plate">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+        <p class="plate-label">LoRA strength comparison — risograph, organic lineart, linocut, vector lineart</p>
+      </div>
+      <p class="fig-caption"><b>Fig. 3</b> — LoRA influence at increasing strength values.</p>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <div class="section-head">
+      <span class="section-num">05</span>
+      <h2>Experience &amp; Difficulties</h2>
+    </div>
+    <ul>
+      <li>Integrating the LoRAs did not work on the first attempt; getting torchao set up correctly required additional troubleshooting.</li>
+      <li>Several rounds of LoRA training were needed before usable results were achieved.</li>
+      <li>Initially, the LoRAs had only a minor effect on the output; introducing specific trigger keywords into the prompt significantly improved their influence.</li>
+      <li>Naming interface functions in a way that felt intuitive to non-technical users proved more difficult than expected.</li>
+      <li>Switching between base models caused long load times, which was resolved by pre-loading models in advance.</li>
+    </ul>
+    <p>
+      The organic, thin-lined LoRA initially produced distorted results once training was complete, and it was
+      seriously considered for removal from the project. However, further experimentation revealed that
+      setting the prompt strictness very high produced unexpectedly compelling results with this style. Rather
+      than discarding it, this LoRA was kept in the final style list as an intentional experimental option.
+    </p>
+  </section>
+
+  <footer class="fade-in">
+    <p class="label">Sources</p>
+    <ul>
+      <li>Gemini was used to support the development of the Python application.</li>
+      <li>Claude was used to support the documentation process.</li>
+    </ul>
+  </footer>
+
+</div>
+</body>
+</html>
