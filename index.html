@@ -13,11 +13,11 @@
     --mono: 'JetBrains Mono', 'IBM Plex Mono', Menlo, Consolas, monospace;
     --serif: 'Source Serif Pro', 'Iowan Old Style', 'Georgia', serif;
   }
-
+ 
   * { box-sizing: border-box; }
-
+ 
   html { -webkit-text-size-adjust: 100%; }
-
+ 
   body {
     margin: 0;
     background: var(--paper);
@@ -27,7 +27,7 @@
     font-size: 18px;
     -webkit-font-smoothing: antialiased;
   }
-
+ 
   @media (prefers-reduced-motion: no-preference) {
     .fade-in { animation: fadeIn 0.6s ease-out both; }
     @keyframes fadeIn {
@@ -35,17 +35,17 @@
       to { opacity: 1; transform: translateY(0); }
     }
   }
-
+ 
   .wrap {
     max-width: 700px;
     margin: 0 auto;
     padding: clamp(32px, 8vw, 96px) clamp(20px, 5vw, 24px) 120px;
   }
-
+ 
   header.title-block {
     margin-bottom: 56px;
   }
-
+ 
   .eyebrow {
     font-family: var(--mono);
     font-size: 12px;
@@ -54,7 +54,7 @@
     color: var(--muted);
     margin: 0 0 18px;
   }
-
+ 
   h1 {
     font-size: clamp(28px, 5vw, 40px);
     line-height: 1.2;
@@ -62,24 +62,24 @@
     margin: 0 0 10px;
     letter-spacing: -0.01em;
   }
-
+ 
   .subtitle {
     font-family: var(--mono);
     font-size: 13px;
     color: var(--muted);
     letter-spacing: 0.02em;
   }
-
+ 
   .hairline {
     border: none;
     border-top: 1px solid var(--rule);
     margin: 40px 0;
   }
-
+ 
   .hairline.thin {
     border-top: 1px solid #ccc;
   }
-
+ 
   /* Abstract */
   .abstract {
     padding: 28px 0 8px;
@@ -87,7 +87,7 @@
     border-bottom: 1px solid var(--rule);
     margin-bottom: 56px;
   }
-
+ 
   .abstract .label {
     font-family: var(--mono);
     font-size: 12px;
@@ -96,61 +96,61 @@
     color: var(--muted);
     margin: 0 0 14px;
   }
-
+ 
   .abstract p {
     font-size: 16.5px;
     font-style: italic;
     color: #222;
   }
-
+ 
   section {
     margin-bottom: 56px;
   }
-
+ 
   .section-head {
     display: flex;
     align-items: baseline;
     gap: 14px;
     margin-bottom: 20px;
   }
-
+ 
   .section-num {
     font-family: var(--mono);
     font-size: 13px;
     color: var(--muted);
     min-width: 22px;
   }
-
+ 
   h2 {
     font-size: 22px;
     font-weight: 600;
     margin: 0;
     letter-spacing: -0.005em;
   }
-
+ 
   section p {
     margin: 0 0 18px;
   }
-
+ 
   section ul {
     margin: 0 0 18px;
     padding-left: 0;
     list-style: none;
   }
-
+ 
   section li {
     position: relative;
     padding-left: 20px;
     margin-bottom: 10px;
   }
-
+ 
   section li::before {
     content: "—";
     position: absolute;
     left: 0;
     color: var(--muted);
   }
-
+ 
   code, .inline-code {
     font-family: var(--mono);
     font-size: 0.88em;
@@ -158,12 +158,12 @@
     padding: 1px 5px;
     border-radius: 3px;
   }
-
+ 
   /* Image placeholder with registration marks */
   .figure {
     margin: 28px 0 34px;
   }
-
+ 
   .plate {
     position: relative;
     border: 1px dashed #b0b0b0;
@@ -173,7 +173,7 @@
     justify-content: center;
     padding: 24px;
   }
-
+ 
   .plate .corner {
     position: absolute;
     width: 14px;
@@ -190,7 +190,7 @@
   .plate .tr { top: -1px; right: -1px; }
   .plate .bl { bottom: -1px; left: -1px; }
   .plate .br { bottom: -1px; right: -1px; }
-
+ 
   .plate-label {
     font-family: var(--mono);
     font-size: 12px;
@@ -200,23 +200,59 @@
     text-transform: uppercase;
     max-width: 420px;
   }
-
+ 
   .fig-caption {
     font-family: var(--mono);
     font-size: 12px;
     color: var(--muted);
     margin-top: 10px;
   }
-
+ 
   .fig-caption b {
     color: var(--ink);
     font-weight: 600;
   }
-
+ 
+  .figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #e2e2e2;
+  }
+ 
+  .figure-pair {
+    display: flex;
+    gap: 16px;
+  }
+ 
+  .figure-pair > div {
+    flex: 1;
+    min-width: 0;
+  }
+ 
+  .figure-pair img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #e2e2e2;
+  }
+ 
+  @media (max-width: 560px) {
+    .figure-pair { flex-direction: column; }
+  }
+ 
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 40px 0 18px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e2e2;
+  }
+ 
   footer {
     margin-top: 64px;
   }
-
+ 
   footer .label {
     font-family: var(--mono);
     font-size: 12px;
@@ -225,20 +261,20 @@
     color: var(--muted);
     margin-bottom: 16px;
   }
-
+ 
   footer ul {
     list-style: none;
     padding: 0;
     margin: 0;
     font-size: 15px;
   }
-
+ 
   footer li {
     padding: 10px 0;
     border-top: 1px solid #e2e2e2;
   }
   footer li:last-child { border-bottom: 1px solid #e2e2e2; }
-
+ 
   @media (max-width: 520px) {
     body { font-size: 16.5px; }
     .abstract p { font-size: 15.5px; }
@@ -247,13 +283,13 @@
 </head>
 <body>
 <div class="wrap">
-
+ 
   <header class="title-block fade-in">
     <p class="eyebrow">Creative Coding — Advanced</p>
     <h1>Graphic Design Style Exploration with Stable Diffusion&nbsp;1.5</h1>
     <p class="subtitle">A Gradio-based image generation tool built for style comparison and LoRA training in Google Colab</p>
   </header>
-
+ 
   <div class="abstract fade-in">
     <p class="label">Abstract</p>
     <p>
@@ -264,12 +300,15 @@
       Colab, first establishing a stable foundation for basic text-to-image generation before extending it with
       custom-trained LoRA models, ControlNet (Canny) edge detection, and accessible interface labeling for
       non-expert users. Two original LoRAs were trained: a colorful, geometric risograph style, and a
-      contrasting organic, thin-lined, minimalist style.  One existing community LoRA trained on vector illustrations 
-      were integrated for further comparison. Theresult is a working image-generation tool that 
-      makes style exploration in SD1.5 approachable for users without prior experience in generative AI.
+      contrasting organic, thin-lined, minimalist style. An existing community-trained LoRA, offering a vector
+      lineart style, was integrated for further comparison. The project surfaced several practical
+      challenges, including inconsistent LoRA influence, long model-switching times, and unstable training
+      results, one of which was repurposed as an intentional experimental style rather than discarded. The
+      result is a working image-generation tool that makes style exploration in SD1.5 approachable for users
+      without prior experience in generative AI.
     </p>
   </div>
-
+ 
   <section class="fade-in">
     <div class="section-head">
       <span class="section-num">01</span>
@@ -287,7 +326,7 @@
       into an accessible tool for generating and comparing these styles side by side.
     </p>
   </section>
-
+ 
   <section class="fade-in">
     <div class="section-head">
       <span class="section-num">02</span>
@@ -305,20 +344,19 @@
       first, a risograph-inspired style, produced colorful and geometric results. The second was designed to
       contrast this with a more organic, thin-lined, minimalist aesthetic.
     </p>
-
+ 
     <div class="figure">
-      <div class="plate">
-        <span class="corner tl"></span><span class="corner tr"></span>
-        <span class="corner bl"></span><span class="corner br"></span>
-        <p class="plate-label">Training set — risograph &amp; organic lineart image sets</p>
+      <div class="figure-pair">
+        <div><img src="a.png" alt="Risograph style training set — sample training images"></div>
+        <div><img src="b.png" alt="Organic lineart style training set — sample training images"></div>
       </div>
-      <p class="fig-caption"><b>Fig. 1</b> — sample images from the two training sets.</p>
+      <p class="fig-caption"><b>Fig. 1</b> — sample images from the two training sets (risograph, left; organic lineart, right).</p>
     </div>
-
+ 
     <p>
-      To broaden the range of available styles and allow for comparison, two existing community-trained LoRAs
-      were also integrated into the application: <em>Linoleum Cut</em> by grafikzeug, for a linocut woodcut
-      aesthetic, and <em>lineart-lora</em> by whitebearhands, for a vector illustration style.
+      To broaden the range of available styles and allow for comparison, an existing community-trained LoRA
+      was also integrated into the application: <em>lineart-lora</em> by whitebearhands, for a vector
+      illustration style.
     </p>
     <p>
       Since the application was intended for users unfamiliar with image generation, labeling each function in
@@ -327,48 +365,108 @@
       alongside each control for additional clarity.
     </p>
   </section>
-
+ 
   <section class="fade-in">
     <div class="section-head">
       <span class="section-num">03</span>
       <h2>Findings &amp; Results</h2>
     </div>
     <p>
-      The application was used to generate and compare outputs across both custom-trained LoRAs and the two
-      integrated community LoRAs, using a shared set of prompts and generation settings to keep comparisons
+      The application was used to generate and compare outputs across both custom-trained LoRAs and the
+      integrated community LoRA, using a shared set of prompts and generation settings to keep comparisons
       consistent.
     </p>
-
+    <p>
+      Prior to introducing any LoRA, the base capabilities of Stable Diffusion&nbsp;1.5 and Dreamshaper-8 were
+      evaluated using the abstract prompt <em>"a geometric composition of overlapping circles and triangles,
+      high contrast,"</em> generated across a range of guidance scale and inference step values.
+    </p>
+ 
     <div class="figure">
-      <div class="plate">
-        <span class="corner tl"></span><span class="corner tr"></span>
-        <span class="corner bl"></span><span class="corner br"></span>
-        <p class="plate-label">Generated results across models and prompts</p>
-      </div>
-      <p class="fig-caption"><b>Fig. 2</b> — comparison of outputs across base models and styles.</p>
+      <img src="1.png" alt="Comparison of Stable Diffusion 1.5 and Dreamshaper-8 outputs across guidance scale and inference steps, no LoRA applied">
+      <p class="fig-caption"><b>Fig. 2</b> — output comparison between Stable Diffusion 1.5 and Dreamshaper-8 across guidance scale (1.0–14.0) and inference steps (10–50); no LoRA applied. Prompt: "a geometric composition of overlapping circles and triangles, high contrast," seed 1234.</p>
     </div>
+ 
+    <p>
+      Dreamshaper-8 produced comparatively consistent results, varying only slightly across the tested
+      parameter range. Stable Diffusion&nbsp;1.5, by contrast, exhibited pronounced artifacting, particularly
+      at lower guidance scale values; output quality improved and stabilized as guidance scale increased.
+    </p>
   </section>
-
+ 
   <section class="fade-in">
     <div class="section-head">
       <span class="section-num">04</span>
       <h2>LoRA Influences</h2>
     </div>
     <p>
-      The following comparisons illustrate the extent to which each LoRA shapes the generated output at
-      varying strengths, highlighting the visual signature each style contributes to a shared base prompt.
+      To assess how each LoRA shapes an abstract composition, the previous procedure was repeated using a
+      fixed prompt, seed, and inference step count (25), while varying LoRA strength and guidance scale across
+      the three available styles: risograph, organic lineart, and vector illustration.
     </p>
-
+ 
     <div class="figure">
-      <div class="plate">
-        <span class="corner tl"></span><span class="corner tr"></span>
-        <span class="corner bl"></span><span class="corner br"></span>
-        <p class="plate-label">LoRA strength comparison — risograph, organic lineart, linocut, vector lineart</p>
-      </div>
-      <p class="fig-caption"><b>Fig. 3</b> — LoRA influence at increasing strength values.</p>
+      <img src="2.png" alt="LoRA influence comparison across guidance scale and LoRA strength, abstract prompt">
+      <p class="fig-caption"><b>Fig. 3</b> — LoRA influence across guidance scale (3.0–10.0) and LoRA strength (0.4–1.0). Prompt: "a geometric composition of overlapping circles and triangles, high contrast," seed 1234, 25 steps.</p>
     </div>
+ 
+    <p>
+      In contrast to the base-model comparison, output variation increased markedly and the artifacting
+      observed at low guidance scale was no longer present. The risograph LoRA produced an increasingly
+      saturated, high-contrast palette as guidance scale increased, while the organic lineart LoRA yielded
+      softer, less geometric, and more muted compositions. At lower LoRA strengths, the vector illustration
+      LoRA produced results visually comparable to the organic lineart output.
+    </p>
+    <p>
+      A second grid was generated using identical parameters, substituting a figurative prompt to evaluate how
+      LoRAs trained primarily on graphic design material would generalize to non-abstract subject matter.
+    </p>
+ 
+    <div class="figure">
+      <img src="3.png" alt="LoRA influence comparison across guidance scale and LoRA strength, figurative cat prompt">
+      <p class="fig-caption"><b>Fig. 4</b> — LoRA influence across guidance scale (3.0–10.0) and LoRA strength (0.4–1.0). Prompt: "a minimalistic vector illustration of a cat, clean composition," seed 1234, 25 steps.</p>
+    </div>
+ 
+    <p>
+      Of the three styles, the risograph LoRA generalized most successfully to the figurative prompt,
+      producing semi-realistic cat portraits with minimal artifacting; color intensity increased proportionally
+      with guidance scale and LoRA strength. The organic lineart LoRA again produced comparatively consistent,
+      low-variance results, similar to its behavior on the abstract prompt, while the vector illustration LoRA
+      showed the most pronounced artifacting at higher LoRA strengths.
+    </p>
+    <p>
+      Finally, the effect of including each LoRA's corresponding trigger word was examined. Even at full LoRA
+      strength, omitting the trigger word resulted in a substantial shift in both style fidelity and output
+      quality relative to prompts that included it.
+    </p>
+ 
+    <div class="figure">
+      <img src="4.png" alt="Comparison of outputs with and without LoRA trigger word, full LoRA strength">
+      <p class="fig-caption"><b>Fig. 5</b> — output comparison with and without trigger word, at full LoRA strength. Prompt: "a geometric abstract composition, high contrast," seed 1234, 25 steps, guidance scale 10, Dreamshaper-8.</p>
+    </div>
+ 
+    <h3>Canny Edge Implementation</h3>
+    <p>
+      To evaluate structural fidelity under spatial conditioning, ControlNet (Canny edge) was applied using
+      three reference images of varying subject complexity, an architectural interior, a portrait, and a macro
+      photograph of a butterfly, across each LoRA style.
+    </p>
+ 
+    <div class="figure">
+      <img src="5.png" alt="ControlNet Canny edge outputs across LoRA styles and reference images">
+      <p class="fig-caption"><b>Fig. 6</b> — ControlNet (Canny) outputs across LoRA styles and reference images. Prompt: "abstract, geometric composition," seed 42, 25 steps, guidance scale 12.0, Dreamshaper-8.</p>
+    </div>
+ 
+    <p>
+      The three reference images were selected to span a range of subject complexity, allowing comparison of
+      how each LoRA responds to structural guidance. Consistent with earlier results, the risograph LoRA
+      remained the most visually distinct, applying saturated color and blocky geometric forms to both the
+      portrait and butterfly references. The organic lineart and vector illustration LoRAs performed comparably
+      to one another, producing more elaborate imagery when guided by the architectural interior reference, but
+      showing reduced fidelity in reconstructing the butterfly's fine wing structure.
+    </p>
   </section>
-
+ 
   <section class="fade-in">
     <div class="section-head">
       <span class="section-num">05</span>
@@ -388,15 +486,16 @@
       than discarding it, this LoRA was kept in the final style list as an intentional experimental option.
     </p>
   </section>
-
+ 
   <footer class="fade-in">
     <p class="label">Sources</p>
     <ul>
+      <li>whitebearhands. <em>lineart-lora</em>. Hugging Face. <a href="https://huggingface.co/whitebearhands/lineart-lora" style="color:inherit;">huggingface.co/whitebearhands/lineart-lora</a></li>
       <li>Gemini was used to support the development of the Python application.</li>
       <li>Claude was used to support the documentation process.</li>
     </ul>
   </footer>
-
+ 
 </div>
 </body>
 </html>
