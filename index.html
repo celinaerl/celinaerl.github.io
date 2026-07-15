@@ -26,6 +26,7 @@
     line-height: 1.65;
     font-size: 18px;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
  
   @media (prefers-reduced-motion: no-preference) {
@@ -159,58 +160,18 @@
     border-radius: 3px;
   }
  
-  /* Image placeholder with registration marks */
+  /* Figures — break out wider than the text column */
   .figure {
-    margin: 28px 0 34px;
-  }
- 
-  .plate {
-    position: relative;
-    border: 1px dashed #b0b0b0;
-    min-height: 200px;
+    margin: 32px calc(50% - 50vw) 40px;
+    width: 100vw;
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 24px;
   }
  
-  .plate .corner {
-    position: absolute;
-    width: 14px;
-    height: 14px;
-  }
-  .plate .corner::before, .plate .corner::after {
-    content: "";
-    position: absolute;
-    background: var(--ink);
-  }
-  .plate .corner::before { width: 100%; height: 1px; top: 50%; }
-  .plate .corner::after { height: 100%; width: 1px; left: 50%; }
-  .plate .tl { top: -1px; left: -1px; }
-  .plate .tr { top: -1px; right: -1px; }
-  .plate .bl { bottom: -1px; left: -1px; }
-  .plate .br { bottom: -1px; right: -1px; }
- 
-  .plate-label {
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--muted);
-    text-align: center;
-    text-transform: uppercase;
-    max-width: 420px;
-  }
- 
-  .fig-caption {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 10px;
-  }
- 
-  .fig-caption b {
-    color: var(--ink);
-    font-weight: 600;
+  .figure-inner {
+    width: 100%;
+    max-width: 1160px;
+    padding: 0 clamp(20px, 5vw, 24px);
   }
  
   .figure img {
@@ -239,6 +200,19 @@
  
   @media (max-width: 560px) {
     .figure-pair { flex-direction: column; }
+  }
+ 
+  .fig-caption {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 10px;
+    max-width: 780px;
+  }
+ 
+  .fig-caption b {
+    color: var(--ink);
+    font-weight: 600;
   }
  
   h3 {
@@ -346,11 +320,13 @@
     </p>
  
     <div class="figure">
-      <div class="figure-pair">
-        <div><img src="images/a.png" alt="Risograph style training set — sample training images"></div>
-        <div><img src="images/b.png" alt="Organic lineart style training set — sample training images"></div>
+      <div class="figure-inner">
+        <div class="figure-pair">
+          <div><img src="images/a.png" alt="Risograph style training set — sample training images"></div>
+          <div><img src="images/b.png" alt="Organic lineart style training set — sample training images"></div>
+        </div>
+        <p class="fig-caption"><b>Fig. 1</b> — sample images from the two training sets (risograph, left; organic lineart, right).</p>
       </div>
-      <p class="fig-caption"><b>Fig. 1</b> — sample images from the two training sets (risograph, left; organic lineart, right).</p>
     </div>
  
     <p>
@@ -383,8 +359,10 @@
     </p>
  
     <div class="figure">
-      <img src="images/1.png" alt="Comparison of Stable Diffusion 1.5 and Dreamshaper-8 outputs across guidance scale and inference steps, no LoRA applied">
-      <p class="fig-caption"><b>Fig. 2</b> — output comparison between Stable Diffusion 1.5 and Dreamshaper-8 across guidance scale (1.0–14.0) and inference steps (10–50); no LoRA applied. Prompt: "a geometric composition of overlapping circles and triangles, high contrast," seed 1234.</p>
+      <div class="figure-inner">
+        <img src="images/1.png" alt="Comparison of Stable Diffusion 1.5 and Dreamshaper-8 outputs across guidance scale and inference steps, no LoRA applied">
+        <p class="fig-caption"><b>Fig. 2</b> — output comparison between Stable Diffusion 1.5 and Dreamshaper-8 across guidance scale (1.0–14.0) and inference steps (10–50); no LoRA applied. Prompt: "a geometric composition of overlapping circles and triangles, high contrast," seed 1234.</p>
+      </div>
     </div>
  
     <p>
@@ -406,8 +384,10 @@
     </p>
  
     <div class="figure">
-      <img src="images/2.png" alt="LoRA influence comparison across guidance scale and LoRA strength, abstract prompt">
-      <p class="fig-caption"><b>Fig. 3</b> — LoRA influence across guidance scale (3.0–10.0) and LoRA strength (0.4–1.0). Prompt: "a geometric composition of overlapping circles and triangles, high contrast," seed 1234, 25 steps.</p>
+      <div class="figure-inner">
+        <img src="images/2.png" alt="LoRA influence comparison across guidance scale and LoRA strength, abstract prompt">
+        <p class="fig-caption"><b>Fig. 3</b> — LoRA influence across guidance scale (3.0–10.0) and LoRA strength (0.4–1.0). Prompt: "a geometric composition of overlapping circles and triangles, high contrast," seed 1234, 25 steps.</p>
+      </div>
     </div>
  
     <p>
@@ -423,8 +403,10 @@
     </p>
  
     <div class="figure">
-      <img src="Images/3.png" alt="LoRA influence comparison across guidance scale and LoRA strength, figurative cat prompt">
-      <p class="fig-caption"><b>Fig. 4</b> — LoRA influence across guidance scale (3.0–10.0) and LoRA strength (0.4–1.0). Prompt: "a minimalistic vector illustration of a cat, clean composition," seed 1234, 25 steps.</p>
+      <div class="figure-inner">
+        <img src="images/3.png" alt="LoRA influence comparison across guidance scale and LoRA strength, figurative cat prompt">
+        <p class="fig-caption"><b>Fig. 4</b> — LoRA influence across guidance scale (3.0–10.0) and LoRA strength (0.4–1.0). Prompt: "a minimalistic vector illustration of a cat, clean composition," seed 1234, 25 steps.</p>
+      </div>
     </div>
  
     <p>
@@ -441,8 +423,10 @@
     </p>
  
     <div class="figure">
-      <img src="Images/4.png" alt="Comparison of outputs with and without LoRA trigger word, full LoRA strength">
-      <p class="fig-caption"><b>Fig. 5</b> — output comparison with and without trigger word, at full LoRA strength. Prompt: "a geometric abstract composition, high contrast," seed 1234, 25 steps, guidance scale 10, Dreamshaper-8.</p>
+      <div class="figure-inner">
+        <img src="images/4.png" alt="Comparison of outputs with and without LoRA trigger word, full LoRA strength">
+        <p class="fig-caption"><b>Fig. 5</b> — output comparison with and without trigger word, at full LoRA strength. Prompt: "a geometric abstract composition, high contrast," seed 1234, 25 steps, guidance scale 10, Dreamshaper-8.</p>
+      </div>
     </div>
  
     <h3>Canny Edge Implementation</h3>
@@ -453,8 +437,10 @@
     </p>
  
     <div class="figure">
-      <img src="Images/5.png" alt="ControlNet Canny edge outputs across LoRA styles and reference images">
-      <p class="fig-caption"><b>Fig. 6</b> — ControlNet (Canny) outputs across LoRA styles and reference images. Prompt: "abstract, geometric composition," seed 42, 25 steps, guidance scale 12.0, Dreamshaper-8.</p>
+      <div class="figure-inner">
+        <img src="images/5.png" alt="ControlNet Canny edge outputs across LoRA styles and reference images">
+        <p class="fig-caption"><b>Fig. 6</b> — ControlNet (Canny) outputs across LoRA styles and reference images. Prompt: "abstract, geometric composition," seed 42, 25 steps, guidance scale 12.0, Dreamshaper-8.</p>
+      </div>
     </div>
  
     <p>
